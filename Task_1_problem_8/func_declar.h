@@ -3,9 +3,9 @@
 
 using namespace std;
 
+// Function that converts a decimal representation of the number in binary
 string DecToBin(const unsigned long int &decNumeric);
 
-// 8.	Використовуючи тільки бітові операції, написати функцію, яка повертає беззнакове довге ціле число, 
-//		у якому встановлений в 1 лише один біт - у позиції найстаршого очищеного (встановленого в 0) біта 
-//		заданого беззнакового довгого цілого числа (параметра функції).
+// Problem N8.  Function that returns an unsigned long integer, which is set to 1 only one bit - in the position
+//				of the oldest cleared (set to 0) bits set unsigned long integer (function parameter).
 unsigned long int SetFirstBit(const unsigned long int &unsgnInt);
