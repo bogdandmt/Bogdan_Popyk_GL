@@ -1,19 +1,41 @@
-#include "func_declar.h"
+#include <iostream>
+#include "func.h"
+
+using namespace std;
+
+const short ULI_BITS = sizeof(ULI) * 8;
+
+bool CheckFormat (string inputStr)
+{
+	//Checking of input format
+	if ( inputStr.empty () )
+	{
+		cout << "Incorrect input format\n";
+		return false;
+	}
+	for (int i = 0; i < inputStr.length (); ++i)
+	{
+		if ( !isdigit (inputStr[i]) )
+		{
+			cout << "Incorrect input format\n";
+			return false;
+		}
+	}
+	return true;
+}
 
 string DecToBin (const ULI &decNumeric)
 {
 	ULI decNumericCopy = decNumeric;
 	char divRemainder;
-	string binStr, tempStr;
+	short counter = ULI_BITS;
+	string binStr (ULI_BITS, '0');
 	while (decNumericCopy > 0)
 	{
 		divRemainder = decNumericCopy % 2;
-		tempStr = divRemainder + '0';
-		binStr.insert (0, tempStr);
+		binStr[--counter] = divRemainder + '0';
 		decNumericCopy /= 2;
 	}
-	if (binStr.empty())
-		binStr = "0";
 	return binStr;
 }
 

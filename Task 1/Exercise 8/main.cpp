@@ -1,27 +1,21 @@
-#include "func_declar.h"
+#include <iostream>
+#include <string>
+#include "../func.h"
+
+using namespace std;
 
 void main (void)
 {
+	string inputStr;
 	cout << "Enter unsigned integer\n";
-	//Checking of input format
-	string str;
-	getline (cin, str);
-	if (str.empty())
+	getline (cin, inputStr);
+	if ( !CheckFormat (inputStr) )
 	{
-		cout << "Incorrect input format\n";
 		return;
-	}
-	for (int i = 0; i < str.length(); ++i)
-	{
-		if ( !isdigit(str[i]) )
-		{
-			cout << "Incorrect input format\n";
-			return;
-		}
 	}
 
 	ULI input, res;
-	input = atol (str.c_str());
+	input = atol( inputStr.c_str () );
 
 	cout << "Binary representation of the entered numeric:\n" << DecToBin (input) ;
 	res = SetFirstBit (input);
