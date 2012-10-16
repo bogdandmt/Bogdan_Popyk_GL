@@ -1,3 +1,8 @@
+/**
+ * @file	func.cpp
+ * @brief	Realization of functions for 1st task
+ */
+
 #include <iostream>
 #include "func.h"
 
@@ -5,7 +10,7 @@ using namespace std;
 
 const short ULI_BITS = sizeof(ULI) * 8;
 
-bool CheckFormat (string inputStr)
+bool CheckFormat (const string &inputStr)
 {
 	//Checking of input format
 	if ( inputStr.empty () )
@@ -37,6 +42,11 @@ string DecToBin (const ULI &decNumeric)
 		decNumericCopy /= 2;
 	}
 	return binStr;
+}
+
+void ChangeClearedBit (ULI &unsgnInt)
+{
+	unsgnInt = unsgnInt | (unsgnInt + 1);
 }
 
 ULI SetFirstBit (const ULI &unsgnInt)

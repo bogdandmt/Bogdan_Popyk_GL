@@ -14,7 +14,7 @@ typedef unsigned long int ULI;
  * @param	[in] inputStr Input data
  * @return	bool Is input data in the correct format
  */
-bool CheckFormat (string inputStr);
+bool CheckFormat (const string &inputStr);
 
 /**
  * @brief	Function that converts a decimal number in binary
@@ -31,3 +31,11 @@ string DecToBin (const ULI &decNumeric);
  * @return	ULI Output unsigned long integer
  */
 ULI SetFirstBit (const ULI &unsgnInt);
+
+/**
+ * @brief	Function that change the youngest cleared bit to '1'
+ * @param	[in, out] unsgnInt Input unsigned long integer to be changed
+ * @remark	Exercise number 9
+ * @return	void
+ */
+void ChangeClearedBit (ULI &unsgnInt);
