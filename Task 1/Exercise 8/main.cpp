@@ -1,3 +1,8 @@
+/**
+ * @file	main.cpp
+ * @brief	Entry point
+ */
+
 #include <iostream>
 #include <string>
 #include "../func.h"
