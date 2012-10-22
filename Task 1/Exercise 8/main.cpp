@@ -9,7 +9,7 @@
 
 using namespace std;
 
-void main (void)
+int main (void)
 {
 	string inputStr;
 	cout << "Enter unsigned integer\n";
@@ -26,4 +26,5 @@ void main (void)
 	res = SetFirstBit (input);
 	cout << "\nDecimal representation of result:\n" << res;
 	cout << "\nBinary representation of the result:\n" << DecToBin (res) << endl;
+	return 0;
 }
