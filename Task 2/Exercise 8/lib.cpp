@@ -1,5 +1,5 @@
 /**
- * @file	func.cpp
+ * @file	lib.cpp
  * @brief	Realization of functions for task 2 exercise 8
  */
 
