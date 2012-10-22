@@ -1,5 +1,5 @@
 /**
- * @file	func.h
+ * @file	lib.h
  * @brief	Structs and prototypes of functions for task 2 exercise 8
  */
 
