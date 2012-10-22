@@ -5,7 +5,7 @@
 
 #include <iostream>
 #include <string>
-#include "../func.h"
+#include "..\func.h"
 
 using namespace std;
 
