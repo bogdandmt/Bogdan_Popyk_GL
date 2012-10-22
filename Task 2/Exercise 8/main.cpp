@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include "lib.h"
 
-void main(void)
+int main(void)
 {
 	//Entering of sequence of points
 	printf("Enter number of points\n");
@@ -61,4 +61,5 @@ void main(void)
 		printf("It was entered only one point\n\n");
 	}
 	delete[] pointsSeq;
+	return 0;
 }
