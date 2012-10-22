@@ -5,11 +5,11 @@
 
 #include <iostream>
 #include <string>
-#include "../func.h"
+#include "..\func.h"
 
 using namespace std;
 
-void main (void)
+int main (void)
 {
 	string inputStr;
 	cout << "Enter unsigned integer\n";
@@ -26,4 +26,5 @@ void main (void)
 	ChangeClearedBit(input);
 	cout << "\nDecimal representation of result:\n" << input;
 	cout << "\nBinary representation of the result:\n" << DecToBin (input) << endl;
+	return 0;
 }
