@@ -8,6 +8,7 @@
 
 void main(void)
 {
+	//Entering of sequence of points
 	printf("Enter number of points\n");
 	UI pointsNumb;
 	if (!scanf("%u", &pointsNumb))
@@ -27,16 +28,18 @@ void main(void)
 			return;
 		}
 	}
+	//Sorting and printing of sequence of points
 	Sort(pointsSeq, pointsNumb);
 	printf("\nSorted sequence:\n");
 	for (i = 0; i < pointsNumb; ++i)
 		printf("%.1f\t%.1f\t%.1f\n", pointsSeq[i].x, pointsSeq[i].y, pointsSeq[i].z);
+	//Finding and printing the two nearest points
 	printf("\n\nThe two nearest points:\n");
 	if (pointsNumb >= 2)
 	{
 		Point pt1 = *pointsSeq, pt2 = *(pointsSeq + 1);
-		double minDist = Dist(pt1, pt2);
-		double tempDist;
+		float minDist = Dist(pt1, pt2);
+		float tempDist;
 		for (i = 0; i < pointsNumb; i++)
 		{
 			for (j = i + 1; j < pointsNumb; j++)

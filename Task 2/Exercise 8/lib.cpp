@@ -3,10 +3,10 @@
  * @brief	Realization of functions for task 2 exercise 8
  */
 
-#include <math.h>
+#include <cmath>
 #include "lib.h"
 
-void Sort(Point *seq, const UI &size)
+void Sort(Point *seq, const UI &size)	//Bubble sort
 {
 	Point temp;
 	int i, j;
@@ -20,7 +20,7 @@ void Sort(Point *seq, const UI &size)
 			}
 }
 
-double Dist(const Point &p1, const Point &p2)
+float Dist(const Point &p1, const Point &p2)
 {
 	return sqrt( (p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y) + (p1.z - p2.z) * (p1.z - p2.z) );
 }

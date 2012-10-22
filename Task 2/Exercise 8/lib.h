@@ -5,10 +5,14 @@
 
 typedef unsigned int UI;
 
+/**
+ * @struct	Point
+ * @brief	Three-dimensional point
+ */
 struct Point
 {
 	float x, y, z;
-};
+}; //Point
 
 /**
  * @brief	The function sorts the sequence of points
@@ -22,6 +26,6 @@ void Sort(Point *seq, const UI &size);
  * @brief	The function calculates the distance between two points
  * @param	[in] p1 First point
  * @param	[in] p2 Second point
- * @return	double The distance between two points
+ * @return	float The distance between two points
  */
-double Dist(const Point &p1, const Point &p2);
+float Dist(const Point &p1, const Point &p2);
