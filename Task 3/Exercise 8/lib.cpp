@@ -5,7 +5,7 @@
 
 #include "lib.h"
 
-void SwapVectorsElements(int *vector1, int *vector2, Byte number)
+void SwapVectorsElements(int *vector1, int *vector2, const Byte &number)
 {
 	int temp = *(vector1 + number);
 	*(vector1 + number) = *(vector2 + number);
