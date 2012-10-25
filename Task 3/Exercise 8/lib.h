@@ -4,6 +4,7 @@
  */
 
 typedef unsigned char Byte;
+typedef unsigned short US;
 
 /**
  * @brief	Function swaps elements by number of two vectors of integers
@@ -12,4 +13,4 @@ typedef unsigned char Byte;
  * @param	[in] number Number of swapping elements
  * @return	void
  */
-void SwapVectorsElements(int *vector1, int *vector2, const Byte &number);
+void SwapVectorsElements(int *vector1, int *vector2, Byte number);
