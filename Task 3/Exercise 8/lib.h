@@ -1,7 +1,13 @@
 /**
  * @file  lib.h
- * @brief	Prototypes of functions for task 3 exercise 8
+ * @brief  Prototypes of functions for task 3 exercise 8
  */
+
+#define ROWS_MIN	1		/* minimum number of rows */
+#define ROWS_MAX	255		/* maximum number of rows */
+#define COLS_MIN	1		/* minimum number of columns */
+#define COLS_MAX	255		/* maximum number of columns */
+#define CHAR_BUF_SZ	12		/* size of char buffer */
 
 typedef unsigned char Byte;
 typedef unsigned short US;
@@ -13,4 +19,4 @@ typedef unsigned short US;
  * @param	[in] number Number of swapping elements
  * @return	void
  */
-void SwapVectorsElements(int *vector1, int *vector2, Byte number);
+void SwapVectorsElem(int *vec1, int *vec2, Byte numb);
