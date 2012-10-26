@@ -5,9 +5,9 @@
 
 #include "lib.h"
 
-void SwapVectorsElements(int *vector1, int *vector2, Byte number)
+void SwapVectorsElem(int *vec1, int *vec2, Byte numb)
 {
-	int temp = *(vector1 + number);
-	*(vector1 + number) = *(vector2 + number);
-	*(vector2 + number) = temp;
+	int temp = *(vec1 + numb);
+	*(vec1 + numb) = *(vec2 + numb);
+	*(vec2 + numb) = temp;
 }
