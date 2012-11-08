@@ -8,7 +8,7 @@
 
 #define ROWS_COLS_MIN  1		/* minimum number of rows or columns */
 #define ROWS_COLS_MAX	255		/* maximum number of rows or columns */
-#define CHAR_BUF_SZ	12		/* size of char buffer */
+#define CHAR_BUF_SZ		12		/* size of char buffer */
 
 typedef unsigned char Byte;
 typedef unsigned short US;
