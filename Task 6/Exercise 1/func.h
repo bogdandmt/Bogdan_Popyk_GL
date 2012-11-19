@@ -9,6 +9,9 @@
 
 using namespace std;
 
+typedef unsigned char Byte;
+typedef unsigned int UI;
+
 const char BRACKETS[] = "()[]{}";
 
 /**
@@ -25,4 +28,4 @@ void Preproc(string &str);
  * @param	[in] r Right boundary
  * @return	bool Are all brackets in input string in the correct format
  */
-bool Check(const string &str, int l, int r);
+bool Check(const string &str, Byte l, Byte r);

@@ -7,8 +7,8 @@
 
 void Preproc(string &str)
 {
-	int prev = 0;
-	int next = str.find_first_of(BRACKETS, prev);
+	UI prev = 0;
+	UI next = str.find_first_of(BRACKETS, prev);
 	while (next != string::npos)
 	{
 		str.erase(prev, next - prev);
@@ -21,18 +21,18 @@ void Preproc(string &str)
 	}
 }
 
-bool Check(const string &str, int l, int r)
+bool Check(const string &str, Byte l, Byte r)
 {
 	if (r <= l)
 	{
 		return true;
 	}
 
-	for (int j = 0; j < 3; ++j)
+	for (Byte j = 0; j < 3; ++j)
 	{
-		int t = -2;
-		int st  = 0;
-		for (int i = l; i < r; ++i)
+		char t = -2;
+		Byte st = 0;
+		for (Byte i = l; i < r; ++i)
 		{
 			if ( str[i] == BRACKETS[2 * j] )
 				if(t == -2)
