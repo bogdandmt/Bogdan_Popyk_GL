@@ -1,3 +1,11 @@
+/**
+ * @file	list.h
+ * @brief	Include file for class "List" (6th task)
+ */
+
+#ifndef _LIST_H_
+#define _LIST_H_
+
 typedef unsigned short int USI;
 
 template <class T>
@@ -15,7 +23,7 @@ class List
 	Item<T> *begin, *end;
 	USI size;
 public:
-	List() : begin(NULL), end(NULL), size(0) {}
+	List();
 
 	USI Size();
 
@@ -24,50 +32,4 @@ public:
 	void PushBack(const T &elem);
 };
 
-template <class T>
-USI List<T>::Size()
-{
-	return size;
-}
-
-template <class T>
-void List<T>::Print()
-{
-	Item<T> *i = begin;
-	while (i)
-	{
-		cout << i -> data <<" ";
-		i = i -> next;
-	}
-}
-
-template <class T>
-void List<T>::PushBack(const T &elem)
-{
-	Item<T> *tmp = new Item<T>(elem);
-	if (tmp)
-	{
-		if (begin)
-		{
-			if (end)
-			{
-				end -> next = tmp;
-				end = tmp;
-				++size;
-			}
-			else
-			{
-				cout << "NULL pointer\n";
-			}
-		}
-		else
-		{
-			begin = end = tmp;
-			++size;
-		}
-	}
-	else
-	{
-		cout << "Memory was not allocated\n";
-	}
-}
+#endif /* _LIST_H_ */

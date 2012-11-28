@@ -3,10 +3,7 @@
  * @brief	Entry point
  */
 
-#include<iostream>
-#include"list.h"
-
-using namespace std;
+#include"lib.h"
 
 int main(void)
 {
