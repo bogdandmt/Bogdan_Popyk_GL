@@ -10,6 +10,6 @@
 
 #include "list.h"
 
-using namespace std; 
+using namespace std;
 
 #endif /* _INCL_H_ */

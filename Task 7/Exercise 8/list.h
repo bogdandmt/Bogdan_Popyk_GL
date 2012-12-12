@@ -16,9 +16,31 @@ struct Item
 
 	Item() : data(), next(0) {}
 
-	Item(const Item<T> &i) : data(i.data), next(i.next) {}
+	Item(const Item<T> &i) 
+	{
+		if (this != &i)
+		{
+			data = i.data;
+			next = 0;
+		}
+	}
 
-	Item(const T &_data) : data(_data), next(0) {}	
+	Item(const T &_data) : data(_data), next(0) {}
+
+	~Item()
+	{
+		next = 0;
+	}
+
+	Item<T>& operator=(const Item<T> &i)
+	{
+		if (this != &i)
+		{
+			data = i.data;
+			next = 0;
+		}
+		return *this;
+	}
 };
 
 template <class T> 
@@ -30,6 +52,8 @@ public:
 	List() : begin(0), end(0), size(0) {}
 
 	List(const List<T> &l);
+
+	~List();
 
 	List<T>& operator=(const List<T> &l);
 
@@ -43,55 +67,70 @@ public:
 };
 
 template <class T> 
-List<T>::List(const List<T> &l) : begin(0), end(0), size(0)
+inline List<T>::List(const List<T> &l) : begin(0), end(0), size(0)
 {
 	if(this != &l && l.Size() && l.begin)
 	{
 		Item<T> *i = l.begin;
-		begin = 0;
 		while (i)
 		{
 			this->PushBack(i->data);
-			i = i -> next;
+			i = i->next;
 		}
 	}
 }
 
 template <class T> 
-List<T>& List<T>::operator=(const List<T> &l)
+inline List<T>::~List()
 {
+	if (begin)
+	{
+		Item<T> *i = begin, *tmp;
+		while (i)
+		{
+			tmp = i;
+			i = i->next;
+			delete tmp;			
+		}
+	}
+}
+
+template <class T> 
+inline List<T>& List<T>::operator=(const List<T> &l)
+{
+	begin = end = 0;
+	size = 0;
 	if(this != &l && l.Size() && l.begin)
 	{
 		Item<T> *i = l.begin;
-		begin = 0;
 		while (i)
 		{
 			this->PushBack(i->data);
-			i = i -> next;
+			i = i->next;
 		}
 	}
 	return *this;
 }
 
 template <class T> 
-USI List<T>::Size() const
+inline USI List<T>::Size() const
 {
 	return size;
 }
 
 template <class T> 
-void List<T>::Print(std::ostream &out) const
+inline void List<T>::Print(std::ostream &out) const
 {
 	Item<T> *i = begin;
 	while (i)
 	{
-		out << i -> data <<" ";
-		i = i -> next;
+		out << i->data << " ";
+		i = i->next;
 	}
 }
 
 template <class T> 
-void List<T>::PushBack(const T &elem)
+inline void List<T>::PushBack(const T &elem)
 {
 	if (begin)
 	{
@@ -100,7 +139,7 @@ void List<T>::PushBack(const T &elem)
 			Item<T> *tmp = new Item<T>(elem);
 			if (tmp)
 			{
-				end -> next = tmp;
+				end->next = tmp;
 				end = tmp;
 				++size;
 			}
