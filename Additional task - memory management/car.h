@@ -152,12 +152,13 @@ struct Car
 
 	~Car()
 	{
-		delete surname;
+		//delete surname;
 	}
 
 	friend std::ostream& operator<<(std::ostream &out, const Car &car)
 	{
 		out << brands[car.brand] << ' ' << car.color << ' ' << car.year << ' ' << car.kmetrage << ' ' << car.surname;
+		//out << car.brand << ' ' << car.color << ' ' << car.year << ' ' << car.kmetrage << ' ' << car.surname;
 		return out;
 	}
 };

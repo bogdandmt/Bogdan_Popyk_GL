@@ -6,6 +6,8 @@
 #ifndef _LIST_H_
 #define _LIST_H_
 
+#define ITEM_SZ sizeof(Item<T>)
+
 typedef unsigned short int USI;
 
 template <class T> 
@@ -29,6 +31,7 @@ struct Item
 
 	~Item()
 	{
+		cout<<"\n~Item() "<<data<<"\n\n";
 		next = 0;
 	}
 
@@ -48,6 +51,9 @@ class List
 {
 	Item<T> *begin, *end;
 	USI size;
+
+	void CompactClear();
+
 public:
 	List() : begin(0), end(0), size(0) {}
 
@@ -67,7 +73,7 @@ public:
 
 	void Clear();
 
-	void Compact(size_t sz);
+	void Compact();
 };
 
 template <class T> 
@@ -89,13 +95,20 @@ inline List<T>::~List()
 {
 	if (begin)
 	{
-		Item<T> *i = begin, *tmp;
-		while (i)
-		{
-			tmp = i;
-			i = i->next;
-			delete tmp;			
-		}
+		//Item<T> *i = begin, *tmp;
+		//while (i)
+		//{
+		//	tmp = i;
+		//	i = i->next;
+		//	delete tmp;	
+		//}
+		////begin = end = 0;
+		//size = 0;
+
+		//delete[] begin;
+
+		//char* t=(char *)begin;
+		//delete[] t;
 	}
 }
 
@@ -128,8 +141,7 @@ inline void List<T>::Print(std::ostream &out) const
 	Item<T> *i = begin;
 	while (i)
 	{
-		out << i->data << ' ' << i<< ' ';
-		out << '\n';
+		out << i->data << "\n" << i << "\n\n";
 		i = i->next;
 	}
 }
@@ -217,39 +229,40 @@ void inline List<T>::Clear()
 			i = i->next;
 			delete tmp;			
 		}
-		begin = end = 0;
+		//begin = end = 0;
 		size = 0;
 	}
 }
 
 template <class T> 
-inline void List<T>::Compact(size_t sz)
+inline void List<T>::Compact()
 {
-	char *temp = new char[sz * size];
+	char *temp = new char[ITEM_SZ * size];
 	Item<T> *curr = begin;
 	for (USI i = 0; i < size; ++i)
 	{
-		memcpy(temp + i * sz, curr, sz);
+		memcpy(temp + i * ITEM_SZ, curr, ITEM_SZ);
 		curr = curr->next;
-		//cout<<i<<' ';
 	}
 	USI szTmp = size;
-	//this->Clear();
-	begin = (Item<T> *)temp;
+	this->Clear();
+	begin = reinterpret_cast<Item<T> *>(temp);
+	//begin = (Item<T> *)temp;
 	curr = begin;
 	for (USI i = 0; i < szTmp; ++i)
 	{
-		if(i != szTmp - 1)
+		if(i < szTmp - 1)
 		{
-			curr->next = (Item<T> *)(temp + (i + 1) * sz);
+			curr->next = (Item<T> *)(temp + (i + 1) * ITEM_SZ);//cout<<endl<<curr->next->data<<endl;
 			curr = curr->next;
 		}
 		else
 		{
-			//curr->next = 0;
-		}
-		
+			curr->next = 0;
+			end = curr;
+		}		
 	}
+	size = szTmp;
 }
 
 #endif /* _LIST_H_ */
