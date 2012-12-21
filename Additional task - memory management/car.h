@@ -12,6 +12,7 @@
 #define CAR_SZ		sizeof(Car)
 
 typedef unsigned int UI;
+typedef unsigned char Byte;
 
 enum Brand
 {
@@ -110,6 +111,7 @@ struct Car
 	UI year : 11;	
 	UI kmetrage : 21;	
 	char *surname;
+	static Byte clrFlg;
 
 	Car() : brand(ALFA_ROMEO), color(0), year(0), kmetrage(0) 
 	{
@@ -152,7 +154,10 @@ struct Car
 
 	~Car()
 	{
-		//delete surname;
+		if (clrFlg)
+		{
+			delete surname;
+		}
 	}
 
 	friend std::ostream& operator<<(std::ostream &out, const Car &car)

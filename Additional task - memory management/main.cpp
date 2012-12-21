@@ -5,6 +5,8 @@
 
 #include "incl.h"
 
+Byte Car::clrFlg = 1;
+
 int main(void)
 {
 	List<Car> l;

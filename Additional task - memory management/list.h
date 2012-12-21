@@ -6,7 +6,7 @@
 #ifndef _LIST_H_
 #define _LIST_H_
 
-#define ITEM_SZ sizeof(Item<T>)
+#define ITEM_SZ sizeof(Item<T>)			//Size of one element type T
 
 typedef unsigned short int USI;
 
@@ -95,20 +95,23 @@ inline List<T>::~List()
 {
 	if (begin)
 	{
-		//Item<T> *i = begin, *tmp;
-		//while (i)
-		//{
-		//	tmp = i;
-		//	i = i->next;
-		//	delete tmp;	
-		//}
-		////begin = end = 0;
-		//size = 0;
-
-		//delete[] begin;
-
-		//char* t=(char *)begin;
-		//delete[] t;
+		if (abs( (char *)begin->next - (char *)begin ) != ITEM_SZ)
+		{
+			Item<T> *i = begin, *tmp;
+			while (i)
+			{
+				tmp = i;
+				i = i->next;
+				delete tmp;	
+			}
+			begin = end = 0;
+			size = 0;
+		}
+		else
+		{
+			char* t = (char *)begin;
+			delete[] t;
+		}
 	}
 }
 
@@ -149,11 +152,14 @@ inline void List<T>::Print(std::ostream &out) const
 template <class T> 
 inline void List<T>::PushBack(const T &elem)
 {
+	char *shift;								//Shift used to guarantee noncompact  placement of list elements
 	if (begin)
 	{
 		if (end)
 		{
+			shift = new char[3];
 			Item<T> *tmp = new Item<T>(elem);
+			delete[] shift;
 			if (tmp)
 			{
 				end->next = tmp;
@@ -172,7 +178,9 @@ inline void List<T>::PushBack(const T &elem)
 	}
 	else
 	{
+		shift = new char[3];
 		Item<T> *tmp = new Item<T>(elem);
+		delete[] shift;
 		if (tmp)
 		{
 			begin = end = tmp;
@@ -229,40 +237,45 @@ void inline List<T>::Clear()
 			i = i->next;
 			delete tmp;			
 		}
-		//begin = end = 0;
+		begin = end = 0;
 		size = 0;
 	}
 }
 
 template <class T> 
-inline void List<T>::Compact()
-{
-	char *temp = new char[ITEM_SZ * size];
-	Item<T> *curr = begin;
-	for (USI i = 0; i < size; ++i)
+void List<T>::Compact()
+{	
+	//Checking for necessity of list compacting
+	if (size >= 2 && abs( (char *)begin->next-(char *)begin ) != ITEM_SZ)
 	{
-		memcpy(temp + i * ITEM_SZ, curr, ITEM_SZ);
-		curr = curr->next;
-	}
-	USI szTmp = size;
-	this->Clear();
-	begin = reinterpret_cast<Item<T> *>(temp);
-	//begin = (Item<T> *)temp;
-	curr = begin;
-	for (USI i = 0; i < szTmp; ++i)
-	{
-		if(i < szTmp - 1)
+		char *temp = new char[ITEM_SZ * size];			//Place for compact list
+		Item<T> *curr = begin;
+		for (USI i = 0; i < size; ++i)
 		{
-			curr->next = (Item<T> *)(temp + (i + 1) * ITEM_SZ);//cout<<endl<<curr->next->data<<endl;
+			memcpy(temp + i * ITEM_SZ, curr, ITEM_SZ);
 			curr = curr->next;
 		}
-		else
+		USI szTmp = size;
+		Car::clrFlg = 0;
+		this->Clear();									//Clearing of diffused list
+		Car::clrFlg = 1;
+		begin = (Item<T> *)temp;
+		curr = begin;
+		for (USI i = 0; i < szTmp; ++i)
 		{
-			curr->next = 0;
-			end = curr;
-		}		
+			if(i < szTmp - 1)
+			{
+				curr->next = (Item<T> *)(temp + (i + 1) * ITEM_SZ);
+				curr = curr->next;
+			}
+			else
+			{
+				curr->next = 0;
+				end = curr;
+			}		
+		}
+		size = szTmp;
 	}
-	size = szTmp;
 }
 
 #endif /* _LIST_H_ */
