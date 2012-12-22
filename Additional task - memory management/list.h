@@ -6,6 +6,10 @@
 #ifndef _LIST_H_
 #define _LIST_H_
 
+#include <iostream>
+
+using namespace std;
+
 #define ITEM_SZ sizeof(Item<T>)			//Size of one element type T
 
 typedef unsigned short int USI;
@@ -31,8 +35,12 @@ struct Item
 
 	~Item()
 	{
-		cout<<"\n~Item() "<<data<<"\n\n";
 		next = 0;
+	}
+
+	void Clear()
+	{
+		data.Clear();
 	}
 
 	Item<T>& operator=(const Item<T> &i)
@@ -74,6 +82,8 @@ public:
 	void Clear();
 
 	void Compact();
+
+	void Diffuse();
 };
 
 template <class T> 
@@ -109,8 +119,16 @@ inline List<T>::~List()
 		}
 		else
 		{
+			Item<T> *i = begin;
+			while (i)
+			{
+				i->Clear();
+				i = i->next;	
+			}
 			char* t = (char *)begin;
 			delete[] t;
+			begin = end = 0;
+			size = 0;
 		}
 	}
 }
@@ -168,12 +186,12 @@ inline void List<T>::PushBack(const T &elem)
 			}
 			else
 			{
-				cout << "Memory was not allocated\n";
+				cout << "ERROR : Memory was not allocated\n";
 			}
 		}
 		else
 		{
-			cout << "NULL pointer\n";
+			cout << "ERROR : NULL pointer\n";
 		}
 	}
 	else
@@ -188,7 +206,7 @@ inline void List<T>::PushBack(const T &elem)
 		}
 		else
 		{
-			cout << "Memory was not allocated\n";
+			cout << "ERROR : Memory was not allocated\n";
 		}
 	}	
 }
@@ -246,7 +264,7 @@ template <class T>
 void List<T>::Compact()
 {	
 	//Checking for necessity of list compacting
-	if (size >= 2 && abs( (char *)begin->next-(char *)begin ) != ITEM_SZ)
+	if (size >= 2 && abs( (char *)begin->next - (char *)begin ) != ITEM_SZ)
 	{
 		char *temp = new char[ITEM_SZ * size];			//Place for compact list
 		Item<T> *curr = begin;
@@ -275,6 +293,45 @@ void List<T>::Compact()
 			}		
 		}
 		size = szTmp;
+	}
+}
+
+template <class T>
+void List<T>::Diffuse()
+{
+	if (size >= 2 && abs( (char *)begin->next - (char *)begin ) == ITEM_SZ)
+	{
+		if (begin)
+		{
+			
+			Item<T> *i = begin;
+			Item<T> *curr = new Item<T>(*begin);
+			Item<T> *tmpBegin = curr;
+			while (i)
+			{
+				Item<T> *tmpNext = 0;
+				if (i->next)
+				{
+					char *shift = new char[3];
+					tmpNext = new Item<T>(*i->next);
+					delete[] shift;
+				}
+				else
+				{
+					end = curr;
+				}
+				curr->next = tmpNext;
+				curr = curr->next;
+				i = i->next;
+			}
+			char *t = (char *)begin;
+			begin = tmpBegin;
+			delete[] t;
+		}
+		else
+		{
+			cout << "ERROR : NULL pointer\n";
+		}
 	}
 }
 

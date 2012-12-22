@@ -160,6 +160,14 @@ struct Car
 		}
 	}
 
+	void Clear()
+	{
+		if (clrFlg)
+		{
+			delete surname;
+		}
+	}
+
 	friend std::ostream& operator<<(std::ostream &out, const Car &car)
 	{
 		out << brands[car.brand] << ' ' << car.color << ' ' << car.year << ' ' << car.kmetrage << ' ' << car.surname;
